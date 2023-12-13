@@ -89,12 +89,12 @@ i2.addEventListener("click", () => {
     if (rmnd <= 3) {
         switch (rmnd) {
             case 2: {
-                homeimg.src = "/Img12.jpg";
+                homeimg.src = "Img12.jpg";
                 homep.style.color = 'black';
                 break;
             }
             case 3: {
-                homeimg.src = "/Img0.jpg";
+                homeimg.src = "Img0.jpg";
                 homep.style.color = 'white';
                 i2.style.display = 'none';
                 i1.classList.remove("disp");
@@ -115,12 +115,12 @@ i1.addEventListener("click", () => {
     if (rmnd1 >= 1) {
         switch (rmnd1) {
             case 2: {
-                homeimg.src = "/Img12.jpg";
+                homeimg.src = "Img12.jpg";
                 homep.style.color = 'black';
                 break;
             }
             case 1: {
-                homeimg.src = "/Img3.jpg";
+                homeimg.src = "Img3.jpg";
                 homep.style.color = 'limegreen';
                 i1.style.display = 'none';
                 i2.style.display = 'inline-block';
