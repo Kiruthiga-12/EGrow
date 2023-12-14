@@ -22,7 +22,7 @@ loga2.addEventListener("click", () => {
 
 let pat = /[a-z]{3,}[0-9]{1,}/gi;
 let pwd = /[0-9]{4}/g;
-let signpwd = /1111/g;
+let signpwd = /[0-9]{4}/g;
 
 //getting Name value:
 lname.addEventListener("input", () => {
