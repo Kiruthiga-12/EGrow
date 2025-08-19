@@ -1,33 +1,45 @@
+import arr from "./arr.js";
+
+let pitems = document.getElementsByClassName("Product_Items")[0];
 let tdiv = document.getElementsByClassName("totaldiv");
-let desc = document.getElementsByClassName("desc");
-let hrt = document.getElementsByClassName("hrt");
-let Qty = document.getElementsByClassName("Qty");
-let rate = document.getElementsByClassName("rate");
-let add = document.getElementsByClassName("Addto");
 let submit = document.getElementById("submit");
-let cntclass1 = document.getElementsByClassName("cntclass1");
 let err = document.getElementById("err");
 let uname = document.getElementById("name");
 let mail = document.getElementById("mail");
 let cell = document.getElementById("cell");
 let comments = document.getElementById("comments");
-let i1 = document.getElementById("arr1");
-let i2 = document.getElementById("arr2");
-let homeimg = document.getElementById("homeimg");
-let homep = document.getElementById("homep");
-let days = document.getElementById("days");
 let hours = document.getElementById("hours");
 let minutes = document.getElementById("minutes");
 let seconds = document.getElementById("seconds");
 let deal = document.getElementById("deal");
+let navi = document.getElementById("navi");
+
+
+let desc = document.getElementsByClassName("desc");
+let hrt = document.getElementsByClassName("hrt");
+let Qty = document.getElementsByClassName("Qty");
+let rate = document.getElementsByClassName("rate");
+let add = document.getElementsByClassName("Addto");
+
+
+
+let i1 = document.getElementById("arr1");
+let i2 = document.getElementById("arr2");
+let homeimg = document.getElementById("homeimg");
+let homep = document.getElementById("homep");
+
+
+
 let lp = document.getElementById("lp");
 let search = document.getElementById("search");
 let isearch = document.getElementById("isearch");
-let navi = document.getElementById("navi");
 let fav = document.getElementById("fav");
 let wishlist = document.getElementById("wishlist");
 let sflag = '';
 let usrname = '';
+
+
+
 // dom loaded
 document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("username");
@@ -39,30 +51,32 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("totalamount");
     localStorage.removeItem("amount");
 })
-//searching the element
-search.addEventListener("input", () => {
-    search.style.color = 'indigo';
-    search.style.fontWeight = 'bold';
-})
-//change event foe serach element.
-search.addEventListener("change", (e) => {
-    sflag = '';
-    let svalue = search.value;
-    for (let i = 0; i < desc.length; i++) {
-        if (desc[i].innerHTML.includes(svalue)) {
+
+//search icon event listener
+navi.addEventListener("click",()=>{
+    if(search.value.length>0){
+        Array.from(desc).findIndex((li)=>{
+        if(li.innerHTML.includes(search.value)){
             search.style.color = 'limegreen';
-            let href = "#" + svalue;
+            let href = "#" + search.value;
             isearch.setAttribute("href", href);
-            sflag = true;
-            search.value = svalue;
         }
+        else{
+            alert("No matching values found!");
+             isearch.removeAttribute("href");
+        }
+    })
     }
-    if (!sflag) {
-        isearch.removeAttribute("href");
-        search.value = "no values found!";
-        search.style.color = 'red';
+    else if (search.value.length==0){
+        alert("Please Enter value to search!!")
+    // if (!sflag) {
+    //     isearch.removeAttribute("href");
+    //     search.value = "no values found!";
+    //     search.style.color = 'red';
     }
-});
+})
+
+
 
 //Login Form validation
 lp.addEventListener("click", () => {
@@ -78,7 +92,7 @@ document.body.addEventListener("click", (e) => {
         lp.innerText = "Welcome " + localStorage.getItem('username');
     }
     else if ((localStorage.getItem("loggedin") != 'true') && (e.target.innerText != "Login/Signup")) {
-        alert("Please Login !!!");
+        // alert("Please Login !!!");
     }
 })
 
@@ -89,12 +103,12 @@ i2.addEventListener("click", () => {
     if (rmnd <= 3) {
         switch (rmnd) {
             case 2: {
-                homeimg.src = "Img12.jpg";
+                homeimg.src = "Images/Img12.jpg";
                 homep.style.color = 'black';
                 break;
             }
             case 3: {
-                homeimg.src = "Img0.jpg";
+                homeimg.src = "Images/Img0.jpg";
                 homep.style.color = 'white';
                 i2.style.display = 'none';
                 i1.classList.remove("disp");
@@ -115,12 +129,12 @@ i1.addEventListener("click", () => {
     if (rmnd1 >= 1) {
         switch (rmnd1) {
             case 2: {
-                homeimg.src = "Img12.jpg";
+                homeimg.src = "Images/Img12.jpg";
                 homep.style.color = 'black';
                 break;
             }
             case 1: {
-                homeimg.src = "Img3.jpg";
+                homeimg.src = "Images/Img3.jpg";
                 homep.style.color = 'limegreen';
                 i1.style.display = 'none';
                 i2.style.display = 'inline-block';
@@ -134,15 +148,7 @@ i1.addEventListener("click", () => {
 
 });
 
-//for hightlighting current box.
-for (let i = 0; i < tdiv.length; i++) {
-    tdiv[i].addEventListener("mouseover", () => {
-        tdiv[i].style.boxShadow = "2px 2px 50px darkgreen";
-    });
-    tdiv[i].addEventListener("mouseleave", () => {
-        tdiv[i].style.boxShadow = "";
-    });
-}
+
 //to add and removed the fav item.
 let favitems = [];
 for (let i = 0; i < hrt.length; i++) {
@@ -295,7 +301,7 @@ for (let i = 0; i < rate.length; i++) {
 
 //Add to Cart Logic.
 let wishitems = [];
-let total_amt = 0.00; descrip = [], cnt = [], rt = [];
+let total_amt = 0.00; let descrip = [], cnt = [], rt = [];
 for (let i = 0; i < add.length; i++) {
     add[i].addEventListener("click", () => {
         if (add[i].value == "Add To Cart") {
@@ -377,27 +383,84 @@ fav.addEventListener("click", () => {
     }
 });
 
-//Date display
-function timedisp() {
-    let nd = new Date();
-    let hrs = nd.getHours();
-    let mins = nd.getMinutes();
-    let secs = nd.getSeconds();
-    hours.innerText = hrs;
-    minutes.innerText = mins;
-    seconds.innerText = secs;
-}
 
-var interval = setInterval(timedisp, 1000);
 
-deal.addEventListener("click", () => {
-    let amt = total_amt;
-    if ((wishitems.length > 0) && (usrname != ' ')) {
-        window.open("EGrow_Deal.html", '_blank', 'resizable=0,width=400,height=200');
-        window.localStorage.setItem("amount", amt);
+
+
+
+
+
+//Renderinf Product items
+if(arr.length>0){
+    let div ;
+    for(let i =0 ;i<arr.length;i++){
+        div = document.createElement("div");
+        div.id = 'div'+(i+1);
+        div.className = 'totaldiv';
+
+        let img = document.createElement("img");
+        img.className ='productimg';
+        img.src = arr[i].img;
+        div.appendChild(img);
+
+        let productdiv = document.createElement("div");
+        productdiv.className ='productdiv';
+
+        let desc = document.createElement("p");
+        desc.className = 'desc';
+        desc.id = arr[i].name;
+        desc.innerHTML = arr[i].name;
+
+        let fav = document.createElement("i");
+        fav.classList.add('fa-regular','fa-heart','hrt');
+
+        let br = document.createElement('br');
+
+        let label = document.createElement("label");
+        label.setAttribute('for','qty'+(i+1))
+        label.innerHTML = `Quantity &nbsp;`;
+
+        let inp = document.createElement("input");
+        inp.type = "number";
+        inp.id = 'qty'+(i+1);
+        inp.min =1;
+        inp.max= 50;
+        inp.value = 1;
+        inp.className = 'Qty';
+
+        let price = document.createElement("p");
+        price.className ='rate';
+        price.id='rate'+(i+1);
+        price.innerHTML = `$${arr[i].rate}`;
+
+        let input = document.createElement("input");
+        input.type = "Submit";
+        input.className = "Addto";
+        input.value = "Add To Cart"
+
+        productdiv.appendChild(desc);
+        productdiv.appendChild(fav);
+        productdiv.appendChild(br)
+        productdiv.appendChild(label);
+        productdiv.appendChild(inp);
+        productdiv.appendChild(price);
+        productdiv.appendChild(input);
+
+        div.appendChild(productdiv);
+         pitems.append(div);
     }
 
-});
+}
+
+//for hightlighting current box.
+for (let i = 0; i < tdiv.length; i++) {
+    tdiv[i].addEventListener("mouseover", () => {
+        tdiv[i].style.boxShadow = "2px 2px 50px darkgreen";
+    });
+    tdiv[i].addEventListener("mouseleave", () => {
+        tdiv[i].style.boxShadow = "";
+    });
+}
 
 //Contact form validation
 submit.addEventListener("click", () => {
@@ -450,5 +513,39 @@ submit.addEventListener("click", () => {
         err.style.color = "darkolivegreen";
         err.innerText = "Comments Submitted!";
     }
+
+})
+
+
+//Date display
+function timedisp() {
+    let nd = new Date();
+    let hrs = nd.getHours();
+    let mins = nd.getMinutes();
+    let secs = nd.getSeconds();
+    hours.innerText = hrs;
+    minutes.innerText = mins;
+    seconds.innerText = secs;
+}
+
+var interval = setInterval(timedisp, 1000);
+
+
+//Dispay the discount amoutn for Cart Items
+deal.addEventListener("click", () => {
+    let amt = total_amt;
+    if ((wishitems.length > 0) && (usrname != ' ')) {
+        window.open("Deal/EGrow_Deal.html", '_blank', 'resizable=0,width=400,height=200');
+        window.localStorage.setItem("amount", amt);
+    }
+else{ 
+    alert('Please add products to Cart to avail discount!!')
+}
+});
+
+//searching the element
+search.addEventListener("input", () => {
+    search.style.color = 'indigo';
+    search.style.fontWeight = 'bold';
 
 })
