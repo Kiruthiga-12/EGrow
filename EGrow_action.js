@@ -33,16 +33,32 @@ let total_amt = 0.00; let descrip = [], cnt = [], rt = [];
 
 
 
-
-
-
-
 let search = document.getElementById("search");
 let isearch = document.getElementById("isearch");
 
 
-
-
+// /search icon event listener
+navi.addEventListener("click",()=>{
+    if(search.value.length>0){
+        Array.from(desc).findIndex((li)=>{
+        if(li.innerHTML.includes(search.value)){
+            search.style.color = 'limegreen';
+            let href = "#" + search.value;
+            isearch.setAttribute("href", href);
+        }
+        else{
+            alert("No matching values found!");
+             isearch.removeAttribute("href");
+        }
+    })
+    }
+    else if (search.value.length==0){
+        alert("Please Enter value to search!!")
+    //     isearch.removeAttribute("href");
+    //     search.value = "no values found!";
+    //     search.style.color = 'red';
+    }
+})
 
 
 //when page gets loaded...
@@ -217,7 +233,7 @@ var interval = setInterval(timedisp, 1000);
 deal.addEventListener("click", () => {
     let amt = total_amt;
     if ((wishitems.length > 0) && (usrname != ' ')) {
-        window.open("Deal/EGrow_Deal.html", '_blank', 'resizable=0,width=400,height=200');
+        window.open("Deal/EGrow_Deal.html", '_blank', 'resizable=0,width=500,height=400');
         window.localStorage.setItem("amount", amt);
     }
 else{ 

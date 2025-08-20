@@ -5,6 +5,7 @@ Designed a responsive webpage using HTML,
 CSS, and JavaScript to showcase plant products with a clean UI.
 
 Functionality:
+#responsive web page.
 #active and hover states
 #Contact form validation.
 #static array data rendered using DOM elements.
