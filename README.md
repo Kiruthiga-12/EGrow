@@ -11,6 +11,8 @@ Functionality:
 #Displays Counter for Discount Closure
 #Displays discount amount for Total Cart amount.
 #Search Option to search product .
+#Image Slider to navigate to next and previous Image.
+#Login form validation with Option for Login/Signup
 
 
 

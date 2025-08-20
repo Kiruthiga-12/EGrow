@@ -1,28 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="eg_favicon.png">
     <title>EGrow Login Page</title>
-    <link rel="stylesheet" href="EGrow_styling.css">
+    <link rel="stylesheet" href="/EGrow_styling.css">
 
 </head>
 
 <body>
     <fieldset>
         <legend id="loginp">Login Page</legend>
-        <label for="lname" class="login_label">User ID</label><br />
-        <input id="lname" type="text" name=userid class="login_input"><br />
+        <!-- <form> -->
+        <label for="lname" class="login_label">Name</label><br />
+        <input id="lname" type="text" name=userid class="login_input" autocomplete="off"><br />
         <label for="lpwd" class="login_label">Password</label><br />
-        <input id="lpwd" type="password" name=pwd class="login_input"><br />
+        <input id="lpwd" type="password" name=pwd class="login_input" autocomplete="off"><br />
         <input type="submit" value="Login" class="login_input login_submit" id="loginsubmit">
         <p class="login_a" id="loga1">Login /</p>
         <p class="login_a" id="loga2">Signup</p>
+        <!-- </form> -->
     </fieldset>
-    <p id="loginmsg"></p>
-    <script src="Egrow_Login_action.js"></script>
+       <p id="loginmsg">Enter UserID only with Alphabets with minimum 3 characters eg: Abc 
+        <br/>Enter password as numbers which is of length 4 Eg:1111</p>
+    <script src="Egrow_Login_action.js" type="text/javascript"></script>
 </body>
 
 </html>

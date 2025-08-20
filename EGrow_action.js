@@ -13,7 +13,11 @@ let minutes = document.getElementById("minutes");
 let seconds = document.getElementById("seconds");
 let deal = document.getElementById("deal");
 let navi = document.getElementById("navi");
-
+let i1 = document.getElementById("arr1");
+let i2 = document.getElementById("arr2");
+let homeimg = document.getElementById("homeimg");
+let homep = document.getElementById("homep");
+let lp = document.getElementById("lp");
 
 let desc = document.getElementsByClassName("desc");
 let hrt = document.getElementsByClassName("hrt");
@@ -22,28 +26,18 @@ let rate = document.getElementsByClassName("rate");
 let add = document.getElementsByClassName("Addto");
 
 
-
-let i1 = document.getElementById("arr1");
-let i2 = document.getElementById("arr2");
-let homeimg = document.getElementById("homeimg");
-let homep = document.getElementById("homep");
-
-
-
-let lp = document.getElementById("lp");
 let search = document.getElementById("search");
 let isearch = document.getElementById("isearch");
 let fav = document.getElementById("fav");
 let wishlist = document.getElementById("wishlist");
-let sflag = '';
 let usrname = '';
 
 
 
 // dom loaded
 document.addEventListener("DOMContentLoaded", () => {
-    localStorage.removeItem("username");
-    localStorage.removeItem("loggedin");
+    // localStorage.removeItem("username");
+    // localStorage.removeItem("loggedin");
     localStorage.removeItem("fitems");
     localStorage.removeItem("factions");
     localStorage.removeItem("wactions");
@@ -69,7 +63,6 @@ navi.addEventListener("click",()=>{
     }
     else if (search.value.length==0){
         alert("Please Enter value to search!!")
-    // if (!sflag) {
     //     isearch.removeAttribute("href");
     //     search.value = "no values found!";
     //     search.style.color = 'red';
@@ -78,75 +71,21 @@ navi.addEventListener("click",()=>{
 
 
 
-//Login Form validation
-lp.addEventListener("click", () => {
-    if (lp.innerText == "Login/Signup") {
-        window.open('EGrow_Login.html', '_blank', 'resizable=0,height=400,width=300');
-    }
-});
+
 
 //if not Logged in , alert Message
-document.body.addEventListener("click", (e) => {
-    if (localStorage.getItem("loggedin") == 'true') {
+// document.body.addEventListener("click", (e) => {
+    // console.log(localStorage)
+    if (localStorage.getItem("loggedin") == "true") {
         usrname = localStorage.getItem("username");
         lp.innerText = "Welcome " + localStorage.getItem('username');
     }
-    else if ((localStorage.getItem("loggedin") != 'true') && (e.target.innerText != "Login/Signup")) {
-        // alert("Please Login !!!");
-    }
-})
+    // else if ((localStorage.getItem("loggedin") != true) && (e.target.innerText != "Login/Signup")) {
+    //     // alert("Please Login !!!");
+    // }
+// })
 
-//navigate to next and Previous Image.
-let rmnd = 1;
-i2.addEventListener("click", () => {
-    ++rmnd;
-    if (rmnd <= 3) {
-        switch (rmnd) {
-            case 2: {
-                homeimg.src = "Images/Img12.jpg";
-                homep.style.color = 'black';
-                break;
-            }
-            case 3: {
-                homeimg.src = "Images/Img0.jpg";
-                homep.style.color = 'white';
-                i2.style.display = 'none';
-                i1.classList.remove("disp");
-                i1.style.display = 'inline-block';
-                i1.style.marginLeft = '150px';
-                rmnd1 = 3;
-                break;
-            }
 
-        }
-    }
-
-});
-
-let rmnd1 = 3;
-i1.addEventListener("click", () => {
-    rmnd1--;
-    if (rmnd1 >= 1) {
-        switch (rmnd1) {
-            case 2: {
-                homeimg.src = "Images/Img12.jpg";
-                homep.style.color = 'black';
-                break;
-            }
-            case 1: {
-                homeimg.src = "Images/Img3.jpg";
-                homep.style.color = 'limegreen';
-                i1.style.display = 'none';
-                i2.style.display = 'inline-block';
-                i2.style.marginLeft = '1440px';
-                rmnd = 1;
-                break;
-            }
-
-        }
-    }
-
-});
 
 
 //to add and removed the fav item.
@@ -549,3 +488,62 @@ search.addEventListener("input", () => {
     search.style.fontWeight = 'bold';
 
 })
+
+
+//navigate to next and Previous Image.
+let rmnd = 1;
+i2.addEventListener("click", () => {
+    ++rmnd;
+    if (rmnd <= 3) {
+        switch (rmnd) {
+            case 2: {
+                homeimg.style.backgroundImage = "url(Images/Img12.jpg)";
+                homep.style.color = 'black';
+                break;
+            }
+            case 3: {
+                homeimg.style.backgroundImage= "url(Images/Img0.jpg)";
+                homep.style.color = 'white';
+                i2.style.display = 'none';
+                i1.classList.remove("disp");
+                i1.style.display = 'inline-block';
+                rmnd1 = 3;
+                break;
+            }
+
+        }
+    }
+
+});
+
+let rmnd1 = 3;
+i1.addEventListener("click", () => {
+    rmnd1--;
+    if (rmnd1 >= 1) {
+        switch (rmnd1) {
+            case 2: {
+                homeimg.style.backgroundImage = "url(Images/Img12.jpg)";
+                homep.style.color = 'black';
+                break;
+            }
+            case 1: {
+                homeimg.style.backgroundImage = "url(Images/Img3.jpg)";
+                homep.style.color = 'limegreen';
+                i1.style.display = 'none';
+                i2.style.display = 'inline-block';
+                rmnd = 1;
+                break;
+            }
+
+        }
+    }
+
+});
+
+
+//Login Form validation
+lp.addEventListener("click", () => {
+    if (lp.innerText == "Login/Signup") {
+        window.open('Login/EGrow_Login.html', '_blank', 'resizable=0,height=500,width=600');
+    }
+});
