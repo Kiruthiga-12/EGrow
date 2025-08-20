@@ -504,11 +504,11 @@ fieldset {
 
 #cartdiv {
     background-color: rgb(4, 94, 71);
-    width: 450px;
+    width: 400px;
     text-align: center;
-    margin-left: 25px;
-    margin-top: 50px;
-    height: 100px;
+    margin: 50px auto;
+    height: 50vh;
+    padding:50px;
 
 }
 
@@ -534,9 +534,8 @@ fieldset {
 #carttable {
     color: aqua;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-top: 30px;
+    margin: 30px auto;
     width: 400px;
-    margin-left: 25px;
 }
 
 table,
@@ -546,7 +545,9 @@ td {
     border: 2px solid rgb(150, 124, 8);
     border-collapse: collapse;
 }
-
+th,tr,td{
+    padding:10px;
+}
 #ftext span {
     color: yellowgreen;
     font-family: cursive;

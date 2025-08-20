@@ -19,6 +19,10 @@ Functionality:
 #View your products from Wishlist
 #Toggle between Wishlist 
 #Clicking Product from wishlist takes to Product Page
+#Based on number of quantity of Product, rate is calculated.
+#add or remove your products from cart list.
+#View your products from cartlist
+#Toggle between cartlist
 
 
 

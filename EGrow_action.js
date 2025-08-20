@@ -21,22 +21,25 @@ let lp = document.getElementById("lp");
 let lu = document.getElementById("lu");
 let hrt = document.getElementsByClassName("hrt");
 let desc = document.getElementsByClassName("desc");
-
-
-let usrname = '';
-let favitems = [];
-
-
-
+let fav = document.getElementById("fav");
+let wishlist = document.getElementById("wishlist");
 let Qty = document.getElementsByClassName("Qty");
 let rate = document.getElementsByClassName("rate");
 let add = document.getElementsByClassName("Addto");
+let usrname = '';
+let favitems = [];
+let wishitems = [];
+let total_amt = 0.00; let descrip = [], cnt = [], rt = [];
+
+
+
+
+
 
 
 let search = document.getElementById("search");
 let isearch = document.getElementById("isearch");
-let fav = document.getElementById("fav");
-let wishlist = document.getElementById("wishlist");
+
 
 
 
@@ -124,9 +127,11 @@ if(arr.length>0){
         div.appendChild(productdiv);
         pitems.append(div);
 
-    //to add and removed the fav item.
+
     }
-    setFavUnFav();
+    setFavUnFav();//fav and unfav products
+    calculateRate(); //rate calculation
+    addToCart();//add to cart
 }
 
 //for hightlighting current box.
@@ -292,6 +297,7 @@ function setFavUnFav(){
 
 for (let i = 0; i < hrt.length; i++) {
     hrt[i].addEventListener("click", () => {
+        if(usrname != ''){
         //Unfav
         if (hrt[i].className.includes("solid")) {
             hrt[i].classList.remove("fa-solid");
@@ -312,13 +318,16 @@ for (let i = 0; i < hrt.length; i++) {
             let favdesc = desc[i].innerText;
             favitems.push([usrname, favdesc]);
         }
+    }
+    else{
+        alert('Please login to add products to wishlist!!')
+    }
 
     })
 
 }
 }
 
-//displays Wishlist Items.
 //favlist and Display
 fav.addEventListener("click", () => {
     if (usrname != '') {
@@ -334,7 +343,6 @@ fav.addEventListener("click", () => {
                 }
             }
         }
-        console.log(finallist)
         if (favitems.length > 0)
             if (usrname == favitems[0][0]) {
                 window.localStorage.setItem("fitems", JSON.stringify(finallist));
@@ -342,6 +350,95 @@ fav.addEventListener("click", () => {
             }
     }
     else{
-        alert("Please Login to add products to your wishlist!")
+        alert("Please Login to view your wishlist!")
     }
 });
+
+//calculate rate items
+function calculateRate(){
+    for (let i = 0; i < rate.length; i++) {
+    Qty[i].addEventListener("input", () => {
+         let quantity = 0;
+         if(Qty[i].value)
+                {if (Qty[i].value > 0 && Qty[i].value <= 50) {
+                    quantity = Qty[i].value *  arr[i].rate;
+                    rate[i].innerText = "$" + quantity + ".00";
+                }
+                else {
+                    alert('Value should be within the range 1-50')
+                    rate[i].innerText = "$" + quantity + ".00";
+                }}
+    });
+
+}
+}
+
+//cartlist and display.
+wishlist.addEventListener("click", () => {
+    if (usrname != '') {
+        //removing session variables.
+        localStorage.removeItem("wactions");
+        localStorage.removeItem("witems");
+        localStorage.removeItem("totalamount");
+        let finalwishlist = [];
+        window.open("Cart/EGrow_Cart.html", "_blank", 'resizable=0,height=450,width=400');
+        for (let k = 0; k < wishitems.length; k++) {
+            for (let j = 0; j < 4; j++) {
+                if (usrname != wishitems[k][j]) {
+                    finalwishlist.push(wishitems[k][j]);
+                }
+            }
+        }
+        if (wishitems.length > 0)
+            if (usrname == wishitems[0][0]) {
+                window.localStorage.setItem("witems", JSON.stringify(finalwishlist));
+                window.localStorage.setItem("wactions", true);
+                window.localStorage.setItem("totalamount", total_amt);
+            }
+    }
+     else{
+        alert("Please Login to view your cart list!")
+    }
+});
+
+//add to cart Logic
+function addToCart(){
+for (let i = 0; i < add.length; i++) {
+ add[i].addEventListener("click", () => {
+    if(usrname != ''){
+        if (add[i].value == "Add To Cart") {
+            descrip[i] = desc[i].innerText; /*to get description*/
+            cnt[i] = Qty[i].value;                 /*to get quantity*/
+            rt[i] = +(rate[i].innerHTML.slice(1,));   /*to get rate*/
+            total_amt += rt[i];                 /*to get total amount*/
+            wishitems.push([usrname, descrip[i], cnt[i], rt[i]]);
+            add[i].value = 'Remove from cart';
+            add[i].classList.add("RemoveFrom");
+            add[i].classList.remove("AddTo");
+        }
+        else if (add[i].value == "Remove from cart") {
+            add[i].value = 'Add To Cart';
+            add[i].classList.remove("RemoveFrom");
+            add[i].classList.add("AddTo");
+            descrip.splice(i, 1);
+            cnt.splice(i, 1);
+            rt[i] = +(rate[i].innerHTML.slice(1,));
+            total_amt -= rt[i];
+            rt.splice(i, 1);
+            let favdesc = desc[i].innerText;
+            for (let k = 0; k < wishitems.length; k++) {
+                for (let j = 0; j < 2; j++) {
+                    if (wishitems[k][j] == favdesc) {
+                        wishitems.splice(k, 1);
+                    }
+                }
+            }
+        }
+    }
+    else{
+    alert("Please Login to add product to cart")
+    }
+    });
+    }
+
+}
