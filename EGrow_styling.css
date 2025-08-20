@@ -450,6 +450,7 @@ fieldset {
     margin: 50px auto;
     padding:20px;
     text-align: center;
+    border:1px solid black;
 
 }
 
@@ -496,9 +497,9 @@ fieldset {
     background-color: rgb(61, 3, 56);
     width: 300px;
     text-align: center;
-    margin-left: 100px;
-    margin-top: 50px;
-    height: 100px;
+    margin: 50px auto;
+    height: 50vh;
+    padding:50px;
 }
 
 #cartdiv {
@@ -516,7 +517,6 @@ fieldset {
     background-color: white;
     color: black;
     font-size: 20px;
-    margin-top: 30px;
     font-family: cursive;
     cursor: pointer;
 
@@ -524,8 +524,11 @@ fieldset {
 
 #ftext {
     background-color: rgb(61, 3, 56);
-    height: 100px;
+    height: 90%;
+    margin:auto;
+    width:80%;
     margin-top: 30px;
+    text-align: left;
 }
 
 #carttable {
@@ -544,11 +547,10 @@ td {
     border-collapse: collapse;
 }
 
-#ftext li {
+#ftext span {
     color: yellowgreen;
-    margin-top: 30px;
     font-family: cursive;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 #discount,#totalamt,#discountamt

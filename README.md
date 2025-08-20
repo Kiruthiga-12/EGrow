@@ -13,6 +13,12 @@ Functionality:
 #Search Option to search product .
 #Image Slider to navigate to next and previous Image.
 #Login form validation with Option for Login/Signup
+#After Login, user details are captured in local Storage.
+#Log off using icon Click.
+#add or remove your products from wishlist.
+#View your products from Wishlist
+#Toggle between Wishlist 
+#Clicking Product from wishlist takes to Product Page
 
 
 
