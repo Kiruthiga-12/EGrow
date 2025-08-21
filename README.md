@@ -24,6 +24,8 @@ Functionality:
 #add or remove your products from cart list.
 #View your products from cartlist
 #Toggle between cartlist
+#Animation for Contact number and Slider Text
+
 
 
 

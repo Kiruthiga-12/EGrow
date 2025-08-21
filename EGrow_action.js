@@ -30,9 +30,6 @@ let usrname = '';
 let favitems = [];
 let wishitems = [];
 let total_amt = 0.00; let descrip = [], cnt = [], rt = [];
-
-
-
 let search = document.getElementById("search");
 let isearch = document.getElementById("isearch");
 
@@ -41,22 +38,19 @@ let isearch = document.getElementById("isearch");
 navi.addEventListener("click",()=>{
     if(search.value.length>0){
         Array.from(desc).findIndex((li)=>{
-        if(li.innerHTML.includes(search.value)){
+            let pat = search.value;
+            let npat = new RegExp(pat,'i');
+        if(npat.test(li.innerHTML)){
+            isearch.href = '#'+li.innerHTML;
             search.style.color = 'limegreen';
-            let href = "#" + search.value;
-            isearch.setAttribute("href", href);
-        }
-        else{
-            alert("No matching values found!");
-             isearch.removeAttribute("href");
         }
     })
     }
     else if (search.value.length==0){
-        alert("Please Enter value to search!!")
-    //     isearch.removeAttribute("href");
-    //     search.value = "no values found!";
-    //     search.style.color = 'red';
+       
+        isearch.removeAttribute("href");
+        search.value = "no values found!";
+        search.style.color = 'red';
     }
 })
 
@@ -164,7 +158,10 @@ for (let i = 0; i < tdiv.length; i++) {
 submit.addEventListener("click", () => {
     let flag = true;
     err.classList.remove("disp");
-    if (!uname.value) {
+    validateOne();
+    validatePattern();
+    function validateOne(){
+if (!uname.value) {
         err.innerText = "Please Enter your Name!";
         flag = false;
     }
@@ -182,8 +179,22 @@ submit.addEventListener("click", () => {
         err.innerText = "Please Enter your Comments/Queries !";
         flag = false;
     }
+    }
+    
+    function validatePattern(){
+        if(uname.value){
+           let pat = /^[a-zA-Z]{3,}$/gi;
+           let val = uname.value;
+            if (pat.test(val)) {
 
-    if (mail.value) {
+            }
+            else {
+            err.style.color = 'red';
+            err.innerText = "Please Enter your Name Only in alphabets !";
+            flag = false;
+        } 
+        }
+ if (mail.value) {
         let pat = /[a-z][0-9]*[a-z]*@[a-z]{1,}.com|[a-z][0-9]*[a-z]*@[a-z]{1,}.in/gi;
         let val = mail.value;
         if (pat.test(val)) {
@@ -196,7 +207,7 @@ submit.addEventListener("click", () => {
         }
     }
     if (cell.value) {
-        let pat1 = /[1-9]{1}[0-9]{9}/;
+        let pat1 = /^[1-9]{1}[0-9]{9}$/;
         let val1 = cell.value;
         if ((pat1.test(val1)) && (val1.length == 10)) {
 
@@ -207,6 +218,8 @@ submit.addEventListener("click", () => {
             flag = false;
         }
     }
+    }
+   
     if (flag) {
         err.style.color = "darkolivegreen";
         err.innerText = "Comments Submitted!";
@@ -243,9 +256,10 @@ else{
 
 //searching the element
 search.addEventListener("input", () => {
-    search.style.color = 'indigo';
+    search.style.cssText = 'color:green;padding:5px';
     search.style.fontWeight = 'bold';
-
+    let href = "#" + search.value;
+    isearch.setAttribute("href", href);
 })
 
 
